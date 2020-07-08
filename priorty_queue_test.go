@@ -42,6 +42,31 @@ func TestPriorityQueueUpdate(t *testing.T) {
 	}
 }
 
+func TestPriorityQueueLookup(t *testing.T) {
+	pq := New()
+	pq.Insert("foo", 3)
+	pq.Insert("bar", 4)
+	pq.UpdatePriority("bar", 2)
+
+	if !pq.Lookup("foo") {
+		t.Fatal("priority lookup failed")
+	}
+
+	if !pq.Lookup("bar") {
+		t.Fatal("priority lookup failed")
+	}
+
+	if pq.Lookup("shotor") {
+		t.Fatal("priority lookup failed")
+	}
+
+	_, _ = pq.Pop()
+
+	if pq.Lookup("bar") {
+		t.Fatal("priority lookup failed")
+	}
+}
+
 func TestPriorityQueueLen(t *testing.T) {
 	pq := New()
 	if pq.Len() != 0 {

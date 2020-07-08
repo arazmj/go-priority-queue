@@ -69,6 +69,11 @@ func (p *PriorityQueue) UpdatePriority(x interface{}, newPriority float64) {
 	heap.Fix(p.itemHeap, item.index)
 }
 
+func (p *PriorityQueue) Lookup(x interface{}) bool {
+	_, ok := p.lookup[x]
+	return ok
+}
+
 type itemHeap []*item
 
 type item struct {
